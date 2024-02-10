@@ -1,4 +1,4 @@
-export default function App() {
+export default function App(): JSX.Element {
     return (
         <main>
             <h1>The Skeleton App</h1>

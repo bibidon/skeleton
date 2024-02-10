@@ -1,7 +1,5 @@
-export default function Signup() {
+export default function Signup(): JSX.Element {
     return (
-        <main>
-            <h1>Signup</h1>
-        </main>
+        <h1>Signup</h1>
     );
 }

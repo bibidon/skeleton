@@ -1,0 +1,23 @@
+.auth-layout-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    position: relative;
+}
+
+.card {
+    width: 400px;
+    z-index: 100;
+}
+
+.card-background {
+    width: 500px;
+    height: 282px;
+    position: absolute;
+    background-color: #FF5722;
+    border-radius: 10px;
+}
