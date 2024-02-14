@@ -30,9 +30,10 @@ export default function Password<FormValue extends FieldValues>(
             control={control}
             name={name}
             rules={rules}
-            render={({field}): JSX.Element => (
+            render={({field: {ref, ...field}}): JSX.Element => (
                 <TextField
                     {...field}
+                    inputRef={ref}
                     id="current-password"
                     type={showPassword ? 'text' : 'password'}
                     className={className}

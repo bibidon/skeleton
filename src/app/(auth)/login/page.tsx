@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Skeleton app login page'
 };
 
-export default function Login(): JSX.Element {
+export default async function Login(): Promise<JSX.Element> {
     return (
         <CardContent className={classes["card-content"]}>
             <LoginForm />

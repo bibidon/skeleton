@@ -25,9 +25,10 @@ export default function Input<FormValue extends FieldValues>(
             control={control}
             name={name}
             rules={rules}
-            render={({field}): JSX.Element => (
+            render={({field: {ref, ...field}}): JSX.Element => (
                 <TextField
                     {...field}
+                    inputRef={ref}
                     id={id}
                     type={type}
                     className={className}
