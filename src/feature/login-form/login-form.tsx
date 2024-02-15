@@ -38,7 +38,7 @@ export default function LoginForm(): JSX.Element {
         });
         console.log(res);
 
-        router.push('/signup');
+        router.push('/');
     };
 
     useEffect((): void => {

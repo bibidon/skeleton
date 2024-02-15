@@ -1,16 +1,13 @@
-import db from '../src/core/services/db';
-import { User } from '../src/shared/models/user';
+import bcrypt from 'bcrypt';
 
-const users: Array<Omit<User, 'id'>> = [{
-    name: 'admin',
-    email: 'admin@test.com'
-}];
+import db from '../src/core/db/create-db';
 
 db.prepare(`
    CREATE TABLE IF NOT EXISTS user (
        id INTEGER PRIMARY KEY AUTOINCREMENT,
        name TEXT NOT NULL,
-       email TEXT NOT NULL UNIQUE
+       email TEXT NOT NULL UNIQUE,
+       password TEXT NOT NULL
    )
 `).run();
 
@@ -23,18 +20,21 @@ db.prepare(`
    )
 `).run();
 
-async function initializeTables(): Promise<void> {
+async function initializeUserTable() {
   const stmt = db.prepare(`
       INSERT INTO user VALUES (
          null,
          @name,
-         @email
+         @email,
+         @password
       )
    `);
 
-  for (const user of users) {
-      stmt.run(user);
-  }
+  stmt.run({
+      name: 'admin',
+      email: 'admin@test.com',
+      password: await bcrypt.hash('admin', 10)
+  });
 }
 
-initializeTables();
+initializeUserTable();
