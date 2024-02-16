@@ -1,4 +1,4 @@
-import { Card } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 
 import classes from './layout.module.css';
 
@@ -6,7 +6,9 @@ export default function AuthLayout({children}: Readonly<{ children: React.ReactN
     return (
         <div className={classes["auth-layout-container"]}>
             <Card className={classes.card}>
-                {children}
+                <CardContent className={classes["card-content"]}>
+                    {children}
+                </CardContent>
             </Card>
             <div className={classes["card-background"]}></div>
         </div>

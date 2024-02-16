@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 
-import { CardContent } from '@mui/material';
-
-import LoginForm from '@/feature/login-form/login-form';
-import classes from './page.module.css';
+import LoginForm from '@/feature/auth/login-form/login-form';
 
 export const metadata: Metadata = {
     title: 'Skeleton Login',
@@ -12,8 +9,6 @@ export const metadata: Metadata = {
 
 export default async function Login(): Promise<JSX.Element> {
     return (
-        <CardContent className={classes["card-content"]}>
-            <LoginForm />
-        </CardContent>
+        <LoginForm />
     );
 }

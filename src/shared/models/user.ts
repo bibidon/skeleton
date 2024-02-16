@@ -1,6 +1,9 @@
 export type User = {
-    id: string;
+    id: number;
     name: string;
     email: string;
+};
+
+export type ServerUser = User & {
     password: string;
 };

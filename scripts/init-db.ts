@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import bcrypt from 'bcrypt';
 
 import db from '../src/core/db/create-db';
@@ -31,9 +32,9 @@ async function initializeUserTable() {
    `);
 
   stmt.run({
-      name: 'admin',
-      email: 'admin@test.com',
-      password: await bcrypt.hash('admin', 10)
+      name: process.env.ADMIN_NAME,
+      email: process.env.ADMIN_EMAIL,
+      password: await bcrypt.hash(process.env.ADMIN_PASSWORD as string, 10)
   });
 }
 

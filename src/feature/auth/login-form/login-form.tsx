@@ -3,22 +3,21 @@
 import { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 import { signIn } from 'next-auth/react';
 
-import { Button } from '@mui/material';
-
 import { useForm } from 'react-hook-form';
+
+import { Button } from '@mui/material';
 
 import Input from '@/shared/components/input';
 import Password from '@/shared/components/password';
-import { PASSWORD_CONFIG, USERNAME_CONFIG } from '@/shared/configs/login-form';
+import { PASSWORD_CONFIG_LOGIN, USERNAME_CONFIG } from '@/shared/configs/auth-form';
 import { LoginFormValue } from '@/shared/models/login-form';
 import classes from './login-form.module.css';
 
 export default function LoginForm(): JSX.Element {
-    const router: AppRouterInstance = useRouter();
+    const router = useRouter();
     const {
         control,
         handleSubmit,
@@ -51,7 +50,7 @@ export default function LoginForm(): JSX.Element {
 
             <Input control={control} errors={errors} className={classes.input} {...USERNAME_CONFIG} />
 
-            <Password control={control} errors={errors} className={classes.input} {...PASSWORD_CONFIG} />
+            <Password control={control} errors={errors} className={classes.input} {...PASSWORD_CONFIG_LOGIN} />
 
             <Button type="submit" variant="contained" disabled={!isDirty || !isValid}>Login</Button>
 

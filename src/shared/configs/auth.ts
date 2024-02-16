@@ -5,7 +5,7 @@ import { DrizzleAdapter } from '@auth/drizzle-adapter';
 import bcrypt from 'bcrypt';
 
 import { db, getUserByEmail } from '@/core/db/schema';
-import { User } from '@/shared/models/user';
+import { ServerUser } from '@/shared/models/user';
 
 export const authConfig  = {
     adapter: DrizzleAdapter(db),
@@ -20,7 +20,7 @@ export const authConfig  = {
                 return null;
             }
 
-            const user: User | undefined = await getUserByEmail(credentials!.username) as User | undefined;
+            const user: ServerUser | undefined = await getUserByEmail(credentials!.username, true) as ServerUser | undefined;
 
             if (!user) {
                 return null;
@@ -32,7 +32,11 @@ export const authConfig  = {
                 return null;
             }
 
-            return user;
+            return {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            };
         }
     })],
     session: {
