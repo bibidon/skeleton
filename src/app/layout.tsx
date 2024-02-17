@@ -5,6 +5,8 @@ import { NextFont } from 'next/dist/compiled/@next/font';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 
+import StoreProvider from '@/core/components/store-provider';
+import Notification from '@/shared/components/notification';
 import theme from '@/theme';
 import './globals.css';
 
@@ -21,9 +23,12 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
             <body className={inter.className}>
                 <AppRouterCacheProvider>
                     <ThemeProvider theme={theme}>
-                        <main>
-                            {children}
-                        </main>
+                        <StoreProvider>
+                            <Notification />
+                            <main>
+                                {children}
+                            </main>
+                        </StoreProvider>
                     </ThemeProvider>
                 </AppRouterCacheProvider>
             </body>

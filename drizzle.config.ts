@@ -8,5 +8,5 @@ export default {
         url: process.env.DB_URL!
     },
     verbose: true,
-    strict: true
+    strict: false
 } satisfies Config;

@@ -3,24 +3,23 @@ import type { NextRequest } from 'next/server'
 
 import { getToken, JWT } from 'next-auth/jwt';
 
+import { apiAuthPrefix, DEFAULT_NOT_LOGGED_IN_REDIRECT, publicRoutes } from '@/shared/configs/routes';
+
 export async function middleware(req: NextRequest) {
-    const publicPaths: Array<string> = ['/login', '/signup'];
-    const protectedPaths: Array<string> = ['/'];
     const path: string = req.nextUrl.pathname;
-    const predicate: (url: string) => boolean = (url: string) => url === path
-    const isPublicPath: boolean = publicPaths.some(predicate);
-    const isProtectedPath: boolean = protectedPaths.some(predicate);
+    const isApiAuthRoute: boolean = path.startsWith(apiAuthPrefix);
+    const isPublicRoute: boolean = publicRoutes.includes(path);
     const token: JWT | null = await getToken({req: req, secret: process.env.SECRET});
 
-    if (isPublicPath || token && isProtectedPath) {
+    if (isApiAuthRoute || isPublicRoute) {
         return NextResponse.next();
-    } else if (!token && isProtectedPath) {
-        return NextResponse.redirect(new URL('/login', req.url));
+    } else if (!token && !isPublicRoute) {
+        return NextResponse.redirect(new URL(DEFAULT_NOT_LOGGED_IN_REDIRECT, req.nextUrl));
     }
 
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
+    matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)']
 }

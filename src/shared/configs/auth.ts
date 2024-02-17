@@ -1,14 +1,15 @@
-import type { AuthOptions } from 'next-auth';
+import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
 
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 import { db } from '@/core/db/db';
 import { getUserByEmail } from '@/core/db/api';
 import { ServerUser } from '@/shared/models/user';
 
-export const authConfig: AuthOptions = {
+export default NextAuth({
     adapter: DrizzleAdapter(db),
     providers: [CredentialsProvider({
         name: 'Credentials',
@@ -53,4 +54,4 @@ export const authConfig: AuthOptions = {
     pages: {
         signIn: '/login'
     }
-};
+} as AuthOptions);

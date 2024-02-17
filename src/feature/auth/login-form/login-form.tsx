@@ -2,9 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { useRouter } from 'next/navigation';
-
-import { signIn } from 'next-auth/react';
+import { signIn, SignInResponse } from 'next-auth/react';
 
 import { useForm } from 'react-hook-form';
 
@@ -12,12 +10,15 @@ import { Button } from '@mui/material';
 
 import Input from '@/shared/components/input';
 import Password from '@/shared/components/password';
+
+import { useAppDispatch } from '@/core/store/hooks';
+import { notificationActions } from '@/core/store/notification';
 import { PASSWORD_CONFIG_LOGIN, USERNAME_CONFIG } from '@/shared/configs/auth-form';
 import { LoginFormValue } from '@/shared/models/login-form';
 import classes from './login-form.module.css';
 
 export default function LoginForm(): JSX.Element {
-    const router = useRouter();
+    const dispatch = useAppDispatch();
     const {
         control,
         handleSubmit,
@@ -30,14 +31,19 @@ export default function LoginForm(): JSX.Element {
         },
         mode: 'onChange'
     });
-    const onSubmit: (formData: LoginFormValue) => void = async (formData: LoginFormValue): Promise<void> => {
-        const res = await signIn('credentials', {
+    const onSubmit: (formData: LoginFormValue) => void = async (formData: LoginFormValue) => {
+        const res: SignInResponse | undefined = await signIn('credentials', {
             ...formData,
             redirect: false
         });
-        console.log(res);
 
-        router.push('/');
+        if (res && res.error) {
+            dispatch(notificationActions.add({
+                type: 'error',
+                message: res.error
+            }));
+        }
+
     };
 
     useEffect((): void => {
