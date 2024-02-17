@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 
 import { NextResponse } from 'next/server';
 
-import { createUser, getUserByEmail } from '@/core/db/schema';
+import { createUser, getUserByEmail } from '@/core/db/api';
 import { SignupFormValue } from '@/shared/models/signup-form';
 import { User } from '@/shared/models/user';
 

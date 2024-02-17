@@ -1,13 +1,13 @@
 {
   "name": "skeleton",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "init-db": "ts-node -O \"{\\\"module\\\":\\\"commonjs\\\"}\" scripts/init-db.ts"
+    "init-db": "drizzle-kit generate:sqlite && drizzle-kit push:sqlite"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.7.0",

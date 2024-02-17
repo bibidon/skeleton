@@ -4,10 +4,11 @@ import { DrizzleAdapter } from '@auth/drizzle-adapter';
 
 import bcrypt from 'bcrypt';
 
-import { db, getUserByEmail } from '@/core/db/schema';
+import { db } from '@/core/db/db';
+import { getUserByEmail } from '@/core/db/api';
 import { ServerUser } from '@/shared/models/user';
 
-export const authConfig  = {
+export const authConfig: AuthOptions = {
     adapter: DrizzleAdapter(db),
     providers: [CredentialsProvider({
         name: 'Credentials',
@@ -20,7 +21,10 @@ export const authConfig  = {
                 return null;
             }
 
-            const user: ServerUser | undefined = await getUserByEmail(credentials!.username, true) as ServerUser | undefined;
+            const user: ServerUser | undefined = await getUserByEmail(
+                credentials!.username,
+                true
+            ) as ServerUser | undefined;
 
             if (!user) {
                 return null;
@@ -34,6 +38,7 @@ export const authConfig  = {
 
             return {
                 id: user.id,
+                uuid: user.uuid,
                 name: user.name,
                 email: user.email
             };
@@ -48,4 +53,4 @@ export const authConfig  = {
     pages: {
         signIn: '/login'
     }
-} as AuthOptions;
+};
