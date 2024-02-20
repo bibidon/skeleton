@@ -19,7 +19,7 @@ export default NextAuth({
         },
         async authorize(credentials) {
             const throwError: () => void = () => {
-                throw new Error('The username of password is invalid');
+                throw new Error('Invalid credentials');
             };
 
             if (!credentials!.username || !credentials!.password) {
@@ -53,7 +53,7 @@ export default NextAuth({
         strategy: 'jwt',
         maxAge: 1 * 24 * 60 * 60
     },
-    secret: process.env.SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     debug: process.env.NODE_ENV === 'development',
     pages: {
         signIn: '/login'

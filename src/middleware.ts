@@ -9,7 +9,7 @@ export async function middleware(req: NextRequest) {
     const path: string = req.nextUrl.pathname;
     const isApiAuthRoute: boolean = path.startsWith(apiAuthPrefix);
     const isPublicRoute: boolean = publicRoutes.includes(path);
-    const token: JWT | null = await getToken({req: req, secret: process.env.SECRET});
+    const token: JWT | null = await getToken({req: req, secret: process.env.NEXTAUTH_SECRET});
 
     if (isApiAuthRoute || isPublicRoute) {
         return NextResponse.next();

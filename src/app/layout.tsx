@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { NextFont } from 'next/dist/compiled/@next/font';
 
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 
+import AuthSessionProvider from '@/core/components/auth-session-provider';
 import StoreProvider from '@/core/components/store-provider';
 import Spinner from '@/shared/components/spinner/spinner';
 import NotificationList from '@/shared/components/notification/notification-list';
 import theme from '@/theme';
 import './globals.css';
 
-const inter: NextFont = Inter({subsets: ['latin']});
+const inter = Inter({subsets: ['latin']});
 
 export const metadata: Metadata = {
     title: 'Skeleton',
@@ -24,13 +24,15 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
             <body className={inter.className}>
                 <AppRouterCacheProvider>
                     <ThemeProvider theme={theme}>
-                        <StoreProvider>
-                            <Spinner />
-                            <NotificationList />
-                            <main>
-                                {children}
-                            </main>
-                        </StoreProvider>
+                        <AuthSessionProvider>
+                            <StoreProvider>
+                                <Spinner />
+                                <NotificationList />
+                                <main>
+                                    {children}
+                                </main>
+                            </StoreProvider>
+                        </AuthSessionProvider>
                     </ThemeProvider>
                 </AppRouterCacheProvider>
             </body>

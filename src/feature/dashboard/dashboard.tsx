@@ -1,16 +1,15 @@
-'use client';
+import { getServerSession, Session } from 'next-auth';
 
-import { signOut } from 'next-auth/react';
+import Logout from '@/shared/components/logout';
 
-export default function Dashboard() {
-    const onLogoutBtnClicked: () => void = (): void => {
-        signOut();
-    };
+export default async function Dashboard() {
+    const session: Session | null = await getServerSession();
+    console.log(session);
 
     return (
         <>
             <h1>Dashboard</h1>
-            <button onClick={onLogoutBtnClicked}>Logout</button>
+            <Logout />
         </>
     );
 }
