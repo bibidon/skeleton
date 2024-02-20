@@ -1,6 +1,8 @@
+import { NotificationType } from '@/shared/configs/notification';
+
 export type NotificationItem = {
     uuid: string;
-    type: 'success' | 'error';
+    type: NotificationType.SUCCESS | NotificationType.ERROR;
     message: string;
 };
 

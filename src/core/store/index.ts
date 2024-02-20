@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import notificationReducer from './notification';
+import applicationReducer from './application';
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
+            application: applicationReducer,
             notification: notificationReducer
         }
     });

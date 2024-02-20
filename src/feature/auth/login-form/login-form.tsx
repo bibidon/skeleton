@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { signIn, SignInResponse } from 'next-auth/react';
+import { useSelector } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
 
@@ -11,14 +11,14 @@ import { Button } from '@mui/material';
 import Input from '@/shared/components/input';
 import Password from '@/shared/components/password';
 
-import { useAppDispatch } from '@/core/store/hooks';
-import { notificationActions } from '@/core/store/notification';
+import useLogin from '@/core/hooks/api/useLogin';
+import { RootState } from '@/core/store';
 import { PASSWORD_CONFIG_LOGIN, USERNAME_CONFIG } from '@/shared/configs/auth-form';
 import { LoginFormValue } from '@/shared/models/login-form';
 import classes from './login-form.module.css';
 
 export default function LoginForm() {
-    const dispatch = useAppDispatch();
+    const isLoading: boolean = useSelector((state: RootState) => state.application.isLoading);
     const {
         control,
         handleSubmit,
@@ -31,19 +31,9 @@ export default function LoginForm() {
         },
         mode: 'onChange'
     });
-    const onSubmit: (formData: LoginFormValue) => void = async (formData: LoginFormValue) => {
-        const res: SignInResponse | undefined = await signIn('credentials', {
-            ...formData,
-            redirect: false
-        });
-
-        if (res && res.error) {
-            dispatch(notificationActions.add({
-                type: 'error',
-                message: res.error
-            }));
-        }
-
+    const {login} = useLogin();
+    const onSubmit: (formData: LoginFormValue) => void = (formData: LoginFormValue): void => {
+        login(formData);
     };
 
     useEffect((): void => {
@@ -58,7 +48,7 @@ export default function LoginForm() {
 
             <Password control={control} errors={errors} className={classes.input} {...PASSWORD_CONFIG_LOGIN} />
 
-            <Button type="submit" variant="contained" disabled={!isDirty || !isValid}>Login</Button>
+            <Button type="submit" variant="contained" disabled={!isDirty || !isValid || isLoading}>Login</Button>
 
         </form>
     );

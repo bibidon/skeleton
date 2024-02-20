@@ -3,7 +3,7 @@
 import { JSX } from 'react';
 
 import NotificationItem from './notification-item';
-import { useAppSelector } from '@/core/store/hooks';
+import { useAppSelector } from '@/core/hooks/useStore';
 import type { RootState } from '@/core/store';
 import { NotificationItem as Item } from '@/shared/models/notification';
 import classes from './notification-list.module.css';
