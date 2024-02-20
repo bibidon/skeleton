@@ -16,7 +16,7 @@ import { EMAIL_CONFIG, NAME_CONFIG, PASSWORD_CONFIG_SIGNUP } from '@/shared/conf
 import { SignupFormValue } from '@/shared/models/signup-form';
 import classes from './signup-form.module.css';
 
-export default function SignupForm(): JSX.Element {
+export default function SignupForm() {
     const router = useRouter();
     const {
         control,

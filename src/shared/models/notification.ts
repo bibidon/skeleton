@@ -1,4 +1,5 @@
 export type NotificationItem = {
+    uuid: string;
     type: 'success' | 'error';
     message: string;
 };

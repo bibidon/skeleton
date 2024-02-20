@@ -19,13 +19,13 @@ export default function Input<FormValue extends FieldValues>(
         isRequired,
         autocomplete
     }: InputProps<FormValue>
-): JSX.Element {
+) {
     return (
         <Controller
             control={control}
             name={name}
             rules={rules}
-            render={({field: {ref, ...field}}): JSX.Element => (
+            render={({field: {ref, ...field}}) => (
                 <TextField
                     {...field}
                     inputRef={ref}

@@ -2,7 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 
-export default function Dashboard(): JSX.Element {
+export default function Dashboard() {
     const onLogoutBtnClicked: () => void = (): void => {
         signOut();
     };

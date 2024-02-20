@@ -19,7 +19,7 @@ export default function Password<FormValue extends FieldValues>(
         size = 'small',
         variant = 'outlined'
     }: PasswordProps<FormValue>
-): JSX.Element {
+) {
     const [showPassword, setShowPassword] = useState(false);
 
     const onShowPasswordBtnClicked = (): void => setShowPassword((show: boolean): boolean => !show);
@@ -30,7 +30,7 @@ export default function Password<FormValue extends FieldValues>(
             control={control}
             name={name}
             rules={rules}
-            render={({field: {ref, ...field}}): JSX.Element => (
+            render={({field: {ref, ...field}}) => (
                 <TextField
                     {...field}
                     inputRef={ref}

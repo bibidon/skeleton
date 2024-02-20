@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description: 'Skeleton app signup page'
 };
 
-export default function Signup(): JSX.Element {
+export default function Signup() {
     return (
         <SignupForm />
     );

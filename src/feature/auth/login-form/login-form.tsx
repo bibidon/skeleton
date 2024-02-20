@@ -17,7 +17,7 @@ import { PASSWORD_CONFIG_LOGIN, USERNAME_CONFIG } from '@/shared/configs/auth-fo
 import { LoginFormValue } from '@/shared/models/login-form';
 import classes from './login-form.module.css';
 
-export default function LoginForm(): JSX.Element {
+export default function LoginForm() {
     const dispatch = useAppDispatch();
     const {
         control,
