@@ -18,8 +18,12 @@ export default NextAuth({
             password: {label: 'Password', type: 'password'}
         },
         async authorize(credentials) {
+            const throwError: () => void = () => {
+                throw new Error('The username of password is invalid');
+            };
+
             if (!credentials!.username || !credentials!.password) {
-                return null;
+                throwError();
             }
 
             const user: ServerUser | undefined = await getUserByEmail(
@@ -28,20 +32,20 @@ export default NextAuth({
             ) as ServerUser | undefined;
 
             if (!user) {
-                return null;
+                throwError();
             }
 
-            const passwordsMatch: boolean = await bcrypt.compare(credentials!.password, user.password);
+            const passwordsMatch: boolean = await bcrypt.compare(credentials!.password, user!.password);
 
             if (!passwordsMatch) {
-                return null;
+                throwError();
             }
 
             return {
-                id: user.id,
-                uuid: user.uuid,
-                name: user.name,
-                email: user.email
+                id: user!.id,
+                uuid: user!.uuid,
+                name: user!.name,
+                email: user!.email
             };
         }
     })],

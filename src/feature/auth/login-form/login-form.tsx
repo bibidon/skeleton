@@ -32,9 +32,6 @@ export default function LoginForm() {
         mode: 'onChange'
     });
     const {login} = useLogin();
-    const onSubmit: (formData: LoginFormValue) => void = (formData: LoginFormValue): void => {
-        login(formData);
-    };
 
     useEffect((): void => {
         setFocus('username');
@@ -42,7 +39,7 @@ export default function LoginForm() {
 
 
     return (
-        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={classes.form} onSubmit={handleSubmit(login)}>
 
             <Input control={control} errors={errors} className={classes.input} {...USERNAME_CONFIG} />
 

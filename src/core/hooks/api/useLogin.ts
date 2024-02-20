@@ -33,9 +33,9 @@ export default function useLogin() {
         if (!hasError) {
             router.push('/');
         }
-    }
+    };
 
     return {
         login
-    }
+    };
 }
