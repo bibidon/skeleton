@@ -1,8 +1,0 @@
-.notification-item {
-    position: relative;
-    z-index: 1000;
-}
-
-.notification-item ~ .notification-item {
-    margin-top: 10px;
-}

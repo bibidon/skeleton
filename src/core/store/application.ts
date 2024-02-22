@@ -10,7 +10,7 @@ const applicationSlice = createSlice({
     name: 'application',
     initialState,
     reducers: {
-        setIsLoading(state: Application, action: PayloadAction<boolean>): void {
+        setIsLoading(state: Application, action: PayloadAction<boolean>) {
             state.isLoading = action.payload;
         }
     }

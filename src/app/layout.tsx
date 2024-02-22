@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 
 import AuthSessionProvider from '@/core/components/auth-session-provider';
 import StoreProvider from '@/core/components/store-provider';
-import Spinner from '@/shared/components/spinner/spinner';
+import Spinner from '@/shared/components/spinner';
 import NotificationList from '@/shared/components/notification/notification-list';
 import theme from '@/theme';
 import './globals.css';
@@ -28,9 +28,7 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
                             <StoreProvider>
                                 <Spinner />
                                 <NotificationList />
-                                <main>
                                     {children}
-                                </main>
                             </StoreProvider>
                         </AuthSessionProvider>
                     </ThemeProvider>

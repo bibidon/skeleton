@@ -9,7 +9,6 @@ import { Alert } from '@mui/material';
 import { useAppDispatch } from '@/core/hooks/useStore';
 import { notificationActions } from '@/core/store/notification';
 import { NotificationItem } from '@/shared/models/notification';
-import classes from './notification-item.module.css';
 
 export default function NotificationItem({uuid, type, message}: NotificationItem) {
     const dispatch = useAppDispatch();
@@ -27,10 +26,10 @@ export default function NotificationItem({uuid, type, message}: NotificationItem
 
     return (
         <Alert
-            className={classes['notification-item']}
             severity={type}
             variant="filled"
-            onClose={onClose}>
+            onClose={onClose}
+            sx={{mb: '10px'}}>
             {message}
         </Alert>
     );
