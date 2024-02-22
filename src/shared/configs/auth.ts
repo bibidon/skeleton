@@ -17,6 +17,7 @@ export default NextAuth({
             username: {label: 'Username', type: 'text'},
             password: {label: 'Password', type: 'password'}
         },
+        // @ts-ignore
         async authorize(credentials) {
             const throwError: () => void = () => {
                 throw new Error('Invalid credentials');
