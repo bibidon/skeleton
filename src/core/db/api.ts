@@ -15,9 +15,11 @@ export async function getUserByEmail(
             .findFirst({
                 columns: {
                     id: true,
-                    uuid: true,
                     name: true,
                     email: true,
+                    emailVerified: true,
+                    image: true,
+                    role: true,
                     password: withPassword
                 },
                 where: eq(user.email, email)
@@ -27,16 +29,43 @@ export async function getUserByEmail(
     }
 }
 
-export async function createUser(newUser: Omit<ServerUser, 'id' | 'uuid'>): Promise<Array<User>> {
+export async function getUserById(
+    id: string,
+    withPassword: boolean = false
+): Promise<User | ServerUser | undefined> {
+    try {
+        return db
+            .query
+            .user
+            .findFirst({
+                columns: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    emailVerified: true,
+                    image: true,
+                    role: true,
+                    password: withPassword
+                },
+                where: eq(user.id, id)
+            });
+    } catch (error) {
+        return;
+    }
+}
+
+export async function createUser(newUser: Omit<ServerUser, 'id' | 'emailVerified' | 'image'>): Promise<Array<User>> {
     try {
         return db
             .insert(user)
             .values(newUser)
             .returning({
                 id: user.id,
-                uuid: user.uuid,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                emailVerified: user.emailVerified,
+                image: user.image,
+                role: user.role
             });
     } catch (error) {
         return [];

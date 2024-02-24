@@ -6,11 +6,13 @@ import { useSelector } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
 
-import { Button } from '@mui/material';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 import Input from '@/shared/components/input';
 import Password from '@/shared/components/password';
 import useLogin from '@/core/hooks/api/useLogin';
+import useGoogleLogin from '@/core/hooks/api/useGoogleLogin';
 import { RootState } from '@/core/store';
 import { PASSWORD_CONFIG_LOGIN, USERNAME_CONFIG } from '@/shared/configs/auth-form';
 import { LoginFormValue } from '@/shared/models/login-form';
@@ -31,6 +33,7 @@ export default function LoginForm() {
         mode: 'onChange'
     });
     const {login} = useLogin();
+    const {googleLogin} = useGoogleLogin();
 
     useEffect((): void => {
         setFocus('username');
@@ -44,7 +47,23 @@ export default function LoginForm() {
 
             <Password control={control} errors={errors} className={classes.input} {...PASSWORD_CONFIG_LOGIN} />
 
-            <Button type="submit" variant="contained" disabled={!isDirty || !isValid || isLoading}>Login</Button>
+            <Box display="flex">
+                <Button
+                    type="submit"
+                    variant="contained"
+                    disabled={!isDirty || !isValid || isLoading}
+                    sx={{width: '100%', mr: 1}}>
+                    Login
+                </Button>
+                <Button
+                    type="button"
+                    variant="contained"
+                    disabled={isLoading}
+                    sx={{width: '100%', ml: 1}}
+                    onClick={googleLogin}>
+                    Login with Google
+                </Button>
+            </Box>
 
         </form>
     );

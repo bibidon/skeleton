@@ -16,7 +16,7 @@ export const publicRoutes: Array<string> = [
 export const apiAuthPrefix: string = '/api/auth';
 
 /**
- * The default redirect path after logging in
+ * The default redirect path after logged in
  * @type {string}
  * */
 export const DEFAULT_LOGIN_REDIRECT: string = '/';

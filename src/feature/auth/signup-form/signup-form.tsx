@@ -10,9 +10,11 @@ import { Button } from '@mui/material';
 
 import Input from '@/shared/components/input';
 import Password from '@/shared/components/password';
+import Select from '@/shared/components/select';
 import useSignup from '@/core/hooks/api/useSignup';
 import { RootState } from '@/core/store';
-import { EMAIL_CONFIG, NAME_CONFIG, PASSWORD_CONFIG_SIGNUP } from '@/shared/configs/auth-form';
+import { EMAIL_CONFIG, NAME_CONFIG, PASSWORD_CONFIG_SIGNUP, ROLE_CONFIG_SIGNUP } from '@/shared/configs/auth-form';
+import { Role } from '@/shared/configs/role';
 import { SignupFormValue } from '@/shared/models/signup-form';
 import classes from './signup-form.module.css';
 
@@ -27,7 +29,8 @@ export default function SignupForm() {
         defaultValues: {
             name: '',
             email: '',
-            password: ''
+            password: '',
+            role: Role.USER
         },
         mode: 'onChange'
     });
@@ -45,6 +48,8 @@ export default function SignupForm() {
             <Input control={control} errors={errors} className={classes.input} {...EMAIL_CONFIG} />
 
             <Password control={control} errors={errors} className={classes.input} {...PASSWORD_CONFIG_SIGNUP} />
+
+            <Select control={control} errors={errors} className={classes.select} {...ROLE_CONFIG_SIGNUP} />
 
             <Button type="submit" variant="contained" disabled={!isDirty || !isValid || isLoading}>Create</Button>
 

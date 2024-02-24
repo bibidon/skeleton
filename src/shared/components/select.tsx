@@ -1,45 +1,46 @@
 import { Controller, FieldValues } from 'react-hook-form';
 
 import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 
-import { InputProps } from '@/shared/models/input';
+import { SelectItem, SelectProps } from '@/shared/models/select';
 
-export default function Input<FormValue extends FieldValues>(
+export default function Select<FormValue extends FieldValues>(
     {
         control,
         errors,
         rules,
         id,
         name,
-        type,
         className,
         label,
+        defaultValue,
         size,
-        placeholder,
         isRequired,
-        autocomplete
-    }: InputProps<FormValue>
+        items
+    }: SelectProps<FormValue>
 ) {
     return (
         <Controller
             control={control}
             name={name}
             rules={rules}
-            render={({field: {ref, ...field}}) => (
+            render={({field}) => (
                 <TextField
                     {...field}
-                    inputRef={ref}
+                    select
+                    defaultValue={defaultValue}
                     id={id}
-                    type={type}
                     className={className}
                     label={label}
                     size={size}
-                    placeholder={placeholder}
                     required={isRequired}
-                    autoComplete={autocomplete}
                     error={!!errors[name]}
-                    helperText={errors[name]?.message as string}
-                />
+                    helperText={errors[name]?.message as string}>
+                    {items.map((item: SelectItem) => (
+                        <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
+                    ))}
+                </TextField>
             )}
         />
     );

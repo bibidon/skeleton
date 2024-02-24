@@ -7,10 +7,10 @@ import { SignupFormValue } from '@/shared/models/signup-form';
 import { User } from '@/shared/models/user';
 
 export default async function signup(formData: SignupFormValue) {
-    const {name, email, password} = formData;
+    const {name, email, password, role} = formData;
 
-    if (!name || !email || !password) {
-        throw new Error('Missing name, email or password');
+    if (!name || !email || !password || !role) {
+        throw new Error('The form values are invalid');
     }
 
     const existingUser: User | undefined = await getUserByEmail(email) as User | undefined;

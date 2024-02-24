@@ -1,7 +1,10 @@
+import { uuid } from '@/core/services/utilities';
+import { Role } from '@/shared/configs/role';
 import { InputProps } from '@/shared/models/input';
 import { LoginFormValue } from '@/shared/models/login-form';
 import { PasswordProps } from '@/shared/models/password';
 import { SignupFormValue } from '@/shared/models/signup-form';
+import { SelectProps } from '@/shared/models/select';
 
 export const NAME_CONFIG: Omit<InputProps<SignupFormValue>, 'control' | 'errors'> = {
     id: 'name',
@@ -65,4 +68,27 @@ export const USERNAME_CONFIG: Omit<InputProps<LoginFormValue>, 'control' | 'erro
             message: 'Please enter a valid email address'
         }
     }
+};
+
+export const ROLE_CONFIG_SIGNUP: Omit<SelectProps<SignupFormValue>, 'control' | 'errors'> = {
+    id: 'role',
+    name: 'role',
+    label: 'Role',
+    size: 'small',
+    isRequired: true,
+    rules: {
+        required: 'The field is required'
+    },
+    items: [
+        {
+            id: uuid(),
+            value: Role.ADMIN,
+            label: 'Admin'
+        },
+        {
+            id: uuid(),
+            value: Role.USER,
+            label: 'User'
+        }
+    ]
 };

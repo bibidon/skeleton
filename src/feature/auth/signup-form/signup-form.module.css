@@ -3,6 +3,7 @@
     flex-direction: column;
 }
 
-.input {
+.input,
+.select {
     height: 70px;
 }
