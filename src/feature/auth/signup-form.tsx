@@ -6,7 +6,9 @@ import { useSelector } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
 
-import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 
 import Input from '@/shared/components/input';
 import Password from '@/shared/components/password';
@@ -16,7 +18,12 @@ import { RootState } from '@/core/store';
 import { EMAIL_CONFIG, NAME_CONFIG, PASSWORD_CONFIG_SIGNUP, ROLE_CONFIG_SIGNUP } from '@/shared/configs/auth-form';
 import { Role } from '@/shared/configs/role';
 import { SignupFormValue } from '@/shared/models/signup-form';
-import classes from './signup-form.module.css';
+
+const Form = styled('form')(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center'
+}));
 
 export default function SignupForm() {
     const isLoading: boolean = useSelector((state: RootState) => state.application.isLoading);
@@ -41,18 +48,20 @@ export default function SignupForm() {
     }, [setFocus]);
 
     return (
-        <form className={classes.form} onSubmit={handleSubmit(signup)}>
+        <Form onSubmit={handleSubmit(signup)}>
 
-            <Input control={control} errors={errors} className={classes.input} {...NAME_CONFIG} />
+            <Input control={control} errors={errors} styles={{height: '70px'}} {...NAME_CONFIG} />
 
-            <Input control={control} errors={errors} className={classes.input} {...EMAIL_CONFIG} />
+            <Input control={control} errors={errors} styles={{height: '70px'}} {...EMAIL_CONFIG} />
 
-            <Password control={control} errors={errors} className={classes.input} {...PASSWORD_CONFIG_SIGNUP} />
+            <Password control={control} errors={errors} styles={{height: '70px'}} {...PASSWORD_CONFIG_SIGNUP} />
 
-            <Select control={control} errors={errors} className={classes.select} {...ROLE_CONFIG_SIGNUP} />
+            <Select control={control} errors={errors} styles={{height: '70px'}} {...ROLE_CONFIG_SIGNUP} />
 
             <Button type="submit" variant="contained" disabled={!isDirty || !isValid || isLoading}>Create</Button>
 
-        </form>
+            <Link href="/signin" underline="hover" sx={{mt: 2}}>Already have an account?</Link>
+
+        </Form>
     );
 }

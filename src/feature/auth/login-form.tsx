@@ -6,8 +6,10 @@ import { useSelector } from 'react-redux';
 
 import { useForm } from 'react-hook-form';
 
+import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 
 import Input from '@/shared/components/input';
 import Password from '@/shared/components/password';
@@ -16,7 +18,12 @@ import useGoogleLogin from '@/core/hooks/api/useGoogleLogin';
 import { RootState } from '@/core/store';
 import { PASSWORD_CONFIG_LOGIN, USERNAME_CONFIG } from '@/shared/configs/auth-form';
 import { LoginFormValue } from '@/shared/models/login-form';
-import classes from './login-form.module.css';
+
+const Form = styled('form')(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center'
+}));
 
 export default function LoginForm() {
     const isLoading: boolean = useSelector((state: RootState) => state.application.isLoading);
@@ -39,13 +46,12 @@ export default function LoginForm() {
         setFocus('username');
     }, [setFocus]);
 
-
     return (
-        <form className={classes.form} onSubmit={handleSubmit(login)}>
+        <Form onSubmit={handleSubmit(login)}>
 
-            <Input control={control} errors={errors} className={classes.input} {...USERNAME_CONFIG} />
+            <Input control={control} errors={errors} styles={{height: '70px'}} {...USERNAME_CONFIG} />
 
-            <Password control={control} errors={errors} className={classes.input} {...PASSWORD_CONFIG_LOGIN} />
+            <Password control={control} errors={errors} styles={{height: '70px'}} {...PASSWORD_CONFIG_LOGIN} />
 
             <Box display="flex">
                 <Button
@@ -65,6 +71,8 @@ export default function LoginForm() {
                 </Button>
             </Box>
 
-        </form>
+            <Link href="/signup" underline="hover" sx={{mt: 2}}>Don&apos;t have an account?</Link>
+
+        </Form>
     );
 }

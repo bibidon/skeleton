@@ -17,7 +17,8 @@ export default function Input<FormValue extends FieldValues>(
         size,
         placeholder,
         isRequired,
-        autocomplete
+        autocomplete,
+        styles
     }: InputProps<FormValue>
 ) {
     return (
@@ -39,6 +40,7 @@ export default function Input<FormValue extends FieldValues>(
                     autoComplete={autocomplete}
                     error={!!errors[name]}
                     helperText={errors[name]?.message as string}
+                    sx={styles}
                 />
             )}
         />

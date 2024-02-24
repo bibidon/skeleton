@@ -6,4 +6,5 @@ export type PasswordProps<FormValue extends FieldValues> = {
     size?: 'medium' | 'small';
     variant?: 'filled' | 'outlined' | 'standard'
     className?: string;
+    styles?: Record<string, any>;
 } & UseControllerProps<FormValue>;

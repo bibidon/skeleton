@@ -11,4 +11,5 @@ export type InputProps<FormValue extends FieldValues> = {
     id?: string;
     className?: string;
     autocomplete?: string;
+    styles?: Record<string, any>;
 } & UseControllerProps<FormValue>;

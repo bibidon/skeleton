@@ -17,7 +17,8 @@ export default function Select<FormValue extends FieldValues>(
         defaultValue,
         size,
         isRequired,
-        items
+        items,
+        styles
     }: SelectProps<FormValue>
 ) {
     return (
@@ -36,7 +37,8 @@ export default function Select<FormValue extends FieldValues>(
                     size={size}
                     required={isRequired}
                     error={!!errors[name]}
-                    helperText={errors[name]?.message as string}>
+                    helperText={errors[name]?.message as string}
+                    sx={styles}>
                     {items.map((item: SelectItem) => (
                         <MenuItem key={item.id} value={item.value}>{item.label}</MenuItem>
                     ))}

@@ -17,7 +17,8 @@ export default function Password<FormValue extends FieldValues>(
         name,
         className,
         size = 'small',
-        variant = 'outlined'
+        variant = 'outlined',
+        styles
     }: PasswordProps<FormValue>
 ) {
     const [showPassword, setShowPassword] = useState(false);
@@ -45,6 +46,7 @@ export default function Password<FormValue extends FieldValues>(
                     autoComplete="current-password"
                     error={!!errors[name]}
                     helperText={errors[name]?.message as string}
+                    sx={styles}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

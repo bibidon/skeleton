@@ -15,4 +15,5 @@ export type SelectProps<FormValue extends FieldValues> = {
     items: Array<SelectItem>;
     id?: string;
     className?: string;
+    styles?: Record<string, any>;
 } & UseControllerProps<FormValue>;

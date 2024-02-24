@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import LoginForm from '@/feature/auth/login-form/login-form';
+import LoginForm from '@/feature/auth/login-form';
 
 export const metadata: Metadata = {
     title: 'Skeleton Login',
