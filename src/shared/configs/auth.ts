@@ -6,8 +6,8 @@ import { DrizzleAdapter } from '@auth/drizzle-adapter';
 
 import bcrypt from 'bcryptjs';
 
-import { db } from '@/core/db/db';
-import { getUserByEmail, getUserById } from '@/core/db/api';
+import { db } from '@/core/db';
+import { getUserByEmail, getUserById } from '@/core/db/api/user';
 import { ServerUser, User } from '@/shared/models/user';
 
 export const authOptions = {

@@ -2,7 +2,7 @@
 
 import bcrypt from 'bcryptjs';
 
-import { createUser, getUserByEmail } from '@/core/db/api';
+import { createUser, getUserByEmail } from '@/core/db/api/user';
 import { SignupFormValue } from '@/shared/models/signup-form';
 import { User } from '@/shared/models/user';
 

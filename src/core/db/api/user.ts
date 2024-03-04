@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 
-import { db } from '@/core/db/db';
+import { db } from '@/core/db';
 import { user } from '@/core/db/schema';
 import { ServerUser, User } from '@/shared/models/user';
 
